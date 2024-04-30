@@ -1,4 +1,6 @@
-streamlit
-transformers
-nltk
-textstat
+streamlit==1.17.0
+transformers==4.22.2
+nltk==3.7
+textstat==0.7.3
+python-docx==0.8.11
+PyPDF2==2.10.0
