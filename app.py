@@ -60,14 +60,7 @@ def main():
         
     if st.button("Process Text"):
         if text_input:
-            st.write("Original Text:")
-            st.write(text_input)
-
-            # Paraphrasing using round-trip translation
-            paraphrased_text = paraphrase_text(text_input)
-            st.write("Paraphrased Text:")
-            st.write(paraphrased_text)
-
+            
             # Analysis of original text
             original_analysis = analyze_text(text_input)
             st.write("Original Text Analysis:")
@@ -75,6 +68,13 @@ def main():
             st.write(f"Readability Score: {original_analysis[1]}")
             st.write(f"Lexical Diversity: {original_analysis[2]:.2f}")
             st.write(f"Number of Sentences: {original_analysis[3]}")
+
+            # Paraphrasing using round-trip translation
+            paraphrased_text = paraphrase_text(text_input)
+            st.write("Paraphrased Text:")
+            st.write(paraphrased_text)
+
+
 
             # Analysis of paraphrased text
             paraphrased_analysis = analyze_text(paraphrased_text)
