@@ -11,6 +11,49 @@ from googletrans import Translator
 # Ensuring that the necessary NLTK resource is downloaded
 nltk.download('punkt')
 
+
+
+ms = st.session_state
+if "themes" not in ms: 
+  ms.themes = {"current_theme": "light",
+                    "refreshed": True,
+                    
+                    "light": {"theme.base": "dark",
+                              "theme.backgroundColor": "black",
+                              "theme.primaryColor": "#c98bdb",
+                              "theme.secondaryBackgroundColor": "#5591f5",
+                              "theme.textColor": "white",
+                              "theme.textColor": "white",
+                              "button_face": "🌜"},
+
+                    "dark":  {"theme.base": "light",
+                              "theme.backgroundColor": "white",
+                              "theme.primaryColor": "#5591f5",
+                              "theme.secondaryBackgroundColor": "#82E1D7",
+                              "theme.textColor": "#0a1464",
+                              "button_face": "🌞"},
+                    }
+  
+
+def ChangeTheme():
+  previous_theme = ms.themes["current_theme"]
+  tdict = ms.themes["light"] if ms.themes["current_theme"] == "light" else ms.themes["dark"]
+  for vkey, vval in tdict.items(): 
+    if vkey.startswith("theme"): st._config.set_option(vkey, vval)
+
+  ms.themes["refreshed"] = False
+  if previous_theme == "dark": ms.themes["current_theme"] = "light"
+  elif previous_theme == "light": ms.themes["current_theme"] = "dark"
+
+
+btn_face = ms.themes["light"]["button_face"] if ms.themes["current_theme"] == "light" else ms.themes["dark"]["button_face"]
+st.button(btn_face, on_click=ChangeTheme)
+
+if ms.themes["refreshed"] == False:
+  ms.themes["refreshed"] = True
+  st.rerun()
+#____________________________________ Dark Theme End
+
 # Function to read PDF file
 def read_pdf(file):
     pdf_reader = PdfReader(file)
@@ -69,12 +112,11 @@ def main():
             st.write(f"Lexical Diversity: {original_analysis[2]:.2f}")
             st.write(f"Number of Sentences: {original_analysis[3]}")
 
+
             # Paraphrasing using round-trip translation
             paraphrased_text = paraphrase_text(text_input)
             st.write("Paraphrased Text:")
-            st.write(paraphrased_text)
-
-
+            st.text_area("Paraphrased Text:", value=paraphrased_text, height=150, disabled=True)
 
             # Analysis of paraphrased text
             paraphrased_analysis = analyze_text(paraphrased_text)
