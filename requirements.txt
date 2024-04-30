@@ -5,4 +5,4 @@ nltk
 textstat
 python-docx
 PyPDF2
-import readtime
+readtime==1.1.1
