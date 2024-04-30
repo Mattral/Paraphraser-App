@@ -6,7 +6,9 @@ from docx import Document
 import io
 import time
 import textstat
+from googletrans import Translator
 
+# Ensuring that the necessary NLTK resource is downloaded
 nltk.download('punkt')
 
 # Function to read PDF file
@@ -35,6 +37,13 @@ def analyze_text(text):
     number_of_sentences = textstat.sentence_count(text)
     return reading_time, readability_score, lexical_diversity, number_of_sentences
 
+def paraphrase_text(input_text):
+    translator = Translator()
+    text_to_french = translator.translate(input_text, dest='fr').text
+    text_to_german = translator.translate(text_to_french, dest='de').text
+    back_to_english = translator.translate(text_to_german, dest='en').text
+    return back_to_english
+
 def main():
     st.title("Text Paraphrasing and Analysis Tool")
 
@@ -54,11 +63,10 @@ def main():
             st.write("Original Text:")
             st.write(text_input)
 
-            # Paraphrasing (simple round-trip translation example, replace with a real model in production)
-            # This part should be replaced with a real NLP model for paraphrasing
-            translated_text = text_input[::-1]  # Dummy reverse to simulate change
+            # Paraphrasing using round-trip translation
+            paraphrased_text = paraphrase_text(text_input)
             st.write("Paraphrased Text:")
-            st.write(translated_text)
+            st.write(paraphrased_text)
 
             # Analysis of original text
             original_analysis = analyze_text(text_input)
@@ -69,7 +77,7 @@ def main():
             st.write(f"Number of Sentences: {original_analysis[3]}")
 
             # Analysis of paraphrased text
-            paraphrased_analysis = analyze_text(translated_text)
+            paraphrased_analysis = analyze_text(paraphrased_text)
             st.write("Paraphrased Text Analysis:")
             st.write(f"Reading Time: {paraphrased_analysis[0]} minutes")
             st.write(f"Readability Score: {paraphrased_analysis[1]}")
