@@ -1,6 +1,4 @@
-Certainly! Below is a sample `README.md` for your Streamlit app repository. This document outlines the purpose of the app, how to set it up, and how to run it, providing clear instructions for anyone who wishes to use or contribute to the project.
 
-```markdown
 # Text Paraphrasing and Analysis Tool
 
 This repository contains a Streamlit app designed to analyze and paraphrase text documents. It supports text input directly or via file uploads (PDF, DOCX, or TXT files). The app provides valuable metrics such as reading time, readability score, lexical diversity, and sentence count, both for the original and paraphrased text.
