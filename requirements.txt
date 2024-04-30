@@ -1,7 +1,7 @@
 streamlit
+googletrans==3.1.0a0
 transformers
 nltk
 textstat
 python-docx
 PyPDF2
-googletrans==3.1.0a0
