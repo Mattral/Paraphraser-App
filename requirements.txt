@@ -5,3 +5,4 @@ nltk
 textstat
 python-docx
 PyPDF2
+import readtime
