@@ -38,8 +38,8 @@ def analyze_text(text):
 def main():
     st.title("Text Paraphrasing and Analysis Tool")
 
-    file = st.file_uploader("Upload your text file, DOCX, or PDF", type=["txt", "docx", "pdf"])
-    text_input = None
+    text_input = st.text_area("Type or paste your text here:", height=200)
+    file = st.file_uploader("Or upload your text file, DOCX, or PDF", type=["txt", "docx", "pdf"])
 
     if file:
         if file.type == "application/pdf":
@@ -49,30 +49,34 @@ def main():
         elif file.type == "text/plain":
             text_input = str(file.read(), "utf-8")
         
-        st.write("Original Text:")
-        st.write(text_input)
+    if st.button("Process Text"):
+        if text_input:
+            st.write("Original Text:")
+            st.write(text_input)
 
-        # Paraphrasing (simple round-trip translation example, replace with a real model in production)
-        # This part should be replaced with a real NLP model for paraphrasing
-        translated_text = text_input[::-1]  # Dummy reverse to simulate change
-        st.write("Paraphrased Text:")
-        st.write(translated_text)
+            # Paraphrasing (simple round-trip translation example, replace with a real model in production)
+            # This part should be replaced with a real NLP model for paraphrasing
+            translated_text = text_input[::-1]  # Dummy reverse to simulate change
+            st.write("Paraphrased Text:")
+            st.write(translated_text)
 
-        # Analysis of original text
-        original_analysis = analyze_text(text_input)
-        st.write("Original Text Analysis:")
-        st.write(f"Reading Time: {original_analysis[0]} minutes")
-        st.write(f"Readability Score: {original_analysis[1]}")
-        st.write(f"Lexical Diversity: {original_analysis[2]:.2f}")
-        st.write(f"Number of Sentences: {original_analysis[3]}")
+            # Analysis of original text
+            original_analysis = analyze_text(text_input)
+            st.write("Original Text Analysis:")
+            st.write(f"Reading Time: {original_analysis[0]} minutes")
+            st.write(f"Readability Score: {original_analysis[1]}")
+            st.write(f"Lexical Diversity: {original_analysis[2]:.2f}")
+            st.write(f"Number of Sentences: {original_analysis[3]}")
 
-        # Analysis of paraphrased text
-        paraphrased_analysis = analyze_text(translated_text)
-        st.write("Paraphrased Text Analysis:")
-        st.write(f"Reading Time: {paraphrased_analysis[0]} minutes")
-        st.write(f"Readability Score: {paraphrased_analysis[1]}")
-        st.write(f"Lexical Diversity: {paraphrased_analysis[2]:.2f}")
-        st.write(f"Number of Sentences: {paraphrased_analysis[3]}")
+            # Analysis of paraphrased text
+            paraphrased_analysis = analyze_text(translated_text)
+            st.write("Paraphrased Text Analysis:")
+            st.write(f"Reading Time: {paraphrased_analysis[0]} minutes")
+            st.write(f"Readability Score: {paraphrased_analysis[1]}")
+            st.write(f"Lexical Diversity: {paraphrased_analysis[2]:.2f}")
+            st.write(f"Number of Sentences: {paraphrased_analysis[3]}")
+        else:
+            st.error("Please enter some text or upload a file to process.")
 
 if __name__ == "__main__":
     main()
