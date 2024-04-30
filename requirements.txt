@@ -4,4 +4,4 @@ nltk
 textstat
 python-docx
 PyPDF2
-googletrans
+googletrans==3.1.0a0
