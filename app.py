@@ -11,7 +11,7 @@ from googletrans import Translator
 # Ensuring that the necessary NLTK resource is downloaded
 nltk.download('punkt')
 
-
+#____________________________________ Theme Part
 
 ms = st.session_state
 if "themes" not in ms: 
@@ -86,6 +86,7 @@ def paraphrase_text(input_text):
     text_to_german = translator.translate(text_to_french, dest='de').text
     back_to_english = translator.translate(text_to_german, dest='en').text
     return back_to_english
+  
 
 def main():
     st.title("Text Paraphrasing and Analysis Tool")
@@ -115,12 +116,7 @@ def main():
             # Paraphrasing using round-trip translation
             paraphrased_text = paraphrase_text(text_input)
             st.write("Paraphrased Text:")
-            st.text_area("Copy this paraphrased text:", paraphrased_text, height=200, disabled=True)
-
-            # Add a button to copy the text
-            if st.button("Copy Paraphrased Text to Clipboard"):
-                st.experimental_set_query_params(text=paraphrased_text)
-                st.experimental_rerun()
+            st.text_area("Copy this paraphrased text (Ctrl+C or Cmd+C):", paraphrased_text, height=200, disabled=True)
 
             # Analysis of paraphrased text
             paraphrased_analysis = analyze_text(paraphrased_text)
