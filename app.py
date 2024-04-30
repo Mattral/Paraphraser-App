@@ -112,11 +112,15 @@ def main():
             st.write(f"Lexical Diversity: {original_analysis[2]:.2f}")
             st.write(f"Number of Sentences: {original_analysis[3]}")
 
-
             # Paraphrasing using round-trip translation
             paraphrased_text = paraphrase_text(text_input)
             st.write("Paraphrased Text:")
-            st.text_area("Paraphrased Text:", value=paraphrased_text, height=150, disabled=True)
+            st.text_area("Copy this paraphrased text:", paraphrased_text, height=200, disabled=True)
+
+            # Add a button to copy the text
+            if st.button("Copy Paraphrased Text to Clipboard"):
+                st.experimental_set_query_params(text=paraphrased_text)
+                st.experimental_rerun()
 
             # Analysis of paraphrased text
             paraphrased_analysis = analyze_text(paraphrased_text)
