@@ -6,6 +6,7 @@ from docx import Document
 import io
 import time
 import textstat
+import readtime
 from googletrans import Translator
 
 # Ensuring that the necessary NLTK resource is downloaded
@@ -73,12 +74,16 @@ def read_docx(file):
     return "\n".join(full_text)
 
 def analyze_text(text):
-    reading_time = textstat.reading_time(text)
+    # Calculate reading time using the readtime library
+    rt_result = readtime.of_text(text)
     readability_score = textstat.flesch_reading_ease(text)
     tokens = word_tokenize(text)
     lexical_diversity = len(set(tokens)) / len(tokens) if tokens else 0
     number_of_sentences = textstat.sentence_count(text)
-    return reading_time, readability_score, lexical_diversity, number_of_sentences
+    
+    # rt_result.text is the formatted string output e.g., '1 min read'
+    return rt_result.text, readability_score, lexical_diversity, number_of_sentences
+
 
 def paraphrase_text(input_text):
     translator = Translator()
