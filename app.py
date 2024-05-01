@@ -113,7 +113,7 @@ def main():
             # Analysis of original text
             original_analysis = analyze_text(text_input)
             st.write("Original Text Analysis:")
-            st.write(f"Reading Time: {original_analysis[0]} minutes")
+            st.write(f"Reading Time: {original_analysis[0]} ")
             st.write(f"Readability Score: {original_analysis[1]}")
             st.write(f"Lexical Diversity: {original_analysis[2]:.2f}")
             st.write(f"Number of Sentences: {original_analysis[3]}")
@@ -126,7 +126,7 @@ def main():
             # Analysis of paraphrased text
             paraphrased_analysis = analyze_text(paraphrased_text)
             st.write("Paraphrased Text Analysis:")
-            st.write(f"Reading Time: {paraphrased_analysis[0]} minutes")
+            st.write(f"Reading Time: {paraphrased_analysis[0]} ")
             st.write(f"Readability Score: {paraphrased_analysis[1]}")
             st.write(f"Lexical Diversity: {paraphrased_analysis[2]:.2f}")
             st.write(f"Number of Sentences: {paraphrased_analysis[3]}")
